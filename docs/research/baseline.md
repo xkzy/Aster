@@ -1,31 +1,9 @@
-# Aster repository baseline
+# Aster repository baseline (historical and current status)
 
-**Date:** 2026-06-04
-**Revision:** unavailable (directory is not a Git repository)
+**Original baseline date:** 2026-06-04. **Updated research status:** 2026-11-12.
 
-## Repository inventory
+The 2026-06-04 inspection found no compiler sources or tests at that time. Since then, the repository has gained a Rust workspace, scalar Aster lexer/parser/type checker, native C-emitting backend, strict safety gate, narrow C/C++/Rust/Python migration experiments, and Ghidra exporter/lowerer. The implementation and tests are documented in [`docs/PROGRESS.md`](../PROGRESS.md), [`docs/spec/aster-0.1.md`](../spec/aster-0.1.md), and [`docs/spec/aster-safety.md`](../spec/aster-safety.md).
 
-The repository contained only the `graft/` indexing directory and one session cache record. No source files, compiler components, tests, benchmarks, package manifests, specifications, or project documentation were present. The cache is tooling state, not project implementation. No Git metadata is present, so there is no prior revision or working-tree baseline to compare.
+The current Aster accepted language contains scalar `i32`/`bool` operations and has no pointers, references, arrays, allocation/deallocation, FFI, concurrency, or `unsafe` construct. It therefore cannot express a heap-ownership inference workload. The safety checker’s structural result is not a mechanized proof of backend semantic preservation. The Ghidra recovery pipeline is conservative and supports only a narrow constant-return case; it is not a general memory-safety or equivalence proof.
 
-## Existing semantics
-
-None found. There is no existing Aster implementation, so no claims can be made about implemented syntax, typing, ownership, arithmetic, ABI, or native code generation.
-
-## Baseline commands and environment
-
-No project test or benchmark commands existed; consequently none could run. Toolchain present at inspection:
-
-- Rust `rustc 1.99.1` / Cargo `1.99.1`
-- Clang `22.1.8`
-- GCC `16.2.1`
-- LLVM `llvm-config 22.1.8`
-
-These report the locally installed environment only, not a reproducible benchmark setup. No benchmark numbers were collected.
-
-## Initial safety and architecture assessment
-
-There was no code to audit. The principal baseline risk is therefore scope: the requested language, research, proofs, optimizer, and benchmark suite do not exist yet. A working native compilation path and a clearly bounded initial subset are prerequisites; research claims and performance claims must remain explicitly unverified until supported by sources and experiments.
-
-## Bootstrap decision
-
-Initialized a minimal Rust workspace with an `aster` library and binary, no external dependencies, and `unsafe_code = forbid`. Subsequent progress adds a lexer, parser, basic type checker, `aster check` command, and tests. This is still not an end-to-end native compiler; no ownership checker or backend exists.
+No CAOI/CAOI-P prototype, ownership-inference experiment, or performance benchmark exists. Current Aster behavior tests and the Ghidra smoke fixture are engineering verification, not research results. The evidence-led research status is maintained in the root [`research/`](../../research/) documents.

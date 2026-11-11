@@ -19,6 +19,14 @@
 - Implemented tiny Rust subset with successful generated Aster native compile plus single-run exit/stdout/stderr comparison. Tests reject unsupported constructs and Cargo ancestry. No full Rust or Cargo migration claims.
 
 
+## 2026-11-12 — Primary-source research checkpoint
+
+- Reviewed primary texts/records for Cpp2Rust, &inator, Scylla, C2SaferRust, Crown, Laertes, Aliasing Limits, CCured, Checked C, Cyclone, ECOOP 2012 ownership inference, Hylo/MVSL, Perceus, Polonius, Aeneas, symbolic Rust borrow checking, RustBelt, VST-Floyd, RefinedC, CompCert, translation validation, translational verifier foundations, and RustCompCert. Full-text access remains incomplete for several works; see `research/novelty_matrix.md` review-status column and `research/claim_ledger.md`.
+- Corrected publication metadata: C2SaferRust is published in IEEE TSE (2026; journal-first at FSE 2026); C2Rust is a tool/project with a RustConf 2018 talk, not a verified peer-reviewed paper with DOI. DOI 10.1145/3368089.3417943 is BugsInPy, not C2Rust. A previous citation to that DOI has been removed.
+- Aster has no `unsafe` construct or escape hatch. Current scalar-only language has no pointer/heap operations, so memory-safety obligations are inapplicable; this does not establish ownership safety for heap programs or backend preservation.
+- Six candidate algorithms are ranked. The strongest lead (proof-producing C-to-safe-Aster migration) does not yet have a distinct algorithmic delta or viable target model. Novelty gate is no-go; no prototype or benchmark is justified. No novelty, proof, semantic-equivalence, or performance claim is made.
+- Root `research/` files now hold the working matrix, claim ledger, questions, candidates, formal/proof requirements, feasibility limits, blocked experiment design, empty Aster results, and non-submission report draft. Continue the missing primary-source review before reconsidering the gate.
+
 ## Sources identified for direct inspection
 
 - Oxide: Aaron Weiss, Daniel Patterson, and Amal Ahmed (paper author metadata should be checked against the paper), “Oxide: The Essence of Rust,” https://arxiv.org/abs/1903.00982

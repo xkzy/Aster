@@ -1,16 +1,9 @@
-# Research questions
+# Research questions (current answers)
 
-1. After direct comparison with Morphic, what nontrivial automatic ownership decision remains unsolved under Aster's subset and value semantics?
-2. Can an explicit weighted objective select among borrow/copy/move/reuse in a tractable way, or are legal choices better represented as ordered greedy refinements with proof-checkable local certificates?
-3. Does joint selection measurably beat sequential borrow checking + copy elimination + escape/reuse analysis, after equal LLVM optimization and target flags?
-4. Which ownership facts are strong enough to justify LLVM alias/effect attributes under the exact LLVM LangRef semantics, including pointer derivation, capture, and writes?
-5. What is the smallest Aster core that can demonstrate observable value semantics, checked arithmetic and static safe borrowing without an unchecked backend gap?
-6. Can module summaries carry effect, escape, alias and reusable-storage facts incrementally while preserving soundness under separate compilation?
-7. Under what conditions can allocation placement move heap storage to stack/regions without changing failure behavior, stack limits, or externally observable allocation behavior?
-8. Which candidate ownership-guided optimizations beat equally configured C (`restrict` when valid), Rust, and LLVM's existing passes on representative workloads?
-9. Can proof certificates for copy elimination and reuse be independently checked at lower cost than re-running the optimization?
-10. What are the true formal boundaries around FFI, concurrency, target ABI, backend semantics and allocation failure?
+**Updated:** 2026-11-12. Expanded evidence and source locators are in [`research/research_questions.md`](../../research/research_questions.md); primary-source claim status is in [`research/claim_ledger.md`](../../research/claim_ledger.md).
 
-## Falsifiable early hypothesis
+1. **Unified ownership inference across C, C++, Rust, and Python?** Not established in reviewed work; most systems are pairwise or source-specific. This is not a universal absence claim. Reviewed Python tools (Cython, mypyc, Numba, Nuitka, PyPy, Codon) focus on extensions/JIT/AOT specialization, not ownership migration. A shared IR would need language-specific semantics for object identity, allocation/drop/finalizers, exceptions, pointer provenance/UB, and integer behavior. Current Aster is scalar-only and has no `unsafe` feature or ownership-bearing heap operations.
+2. **Static memory safety with no added runtime checks?** Possible for a statically restricted accepted subset; not novel by itself. Rust-like checking, Scylla, Crown, and safe dialects cover related designs. Aster’s present memory-safety obligations are inapplicable because memory operations are unexpressible; this is not a heap-safety proof or backend-preservation proof. No added memory checks do not imply no other runtime cost or performance parity.
+3. **Cost-aware ownership optimization?** Broadly, not novel. CCured minimizes runtime-check cost subject to safety, &inator chooses least-cost correct interface types, and Perceus/Morphic optimize ownership-related reuse/RC. Aster must define an exact novel choice space and show gains over composed standard analyses under equal optimization settings.
 
-The high-level formulation “cost-aware joint inference” alone is not novel. A possible engineering hypothesis—not a novelty claim—is that a small, sound ownership-fact interface can allow LLVM to optimize more reliably without programmer alias annotations. This is disproven if equivalent C `restrict` annotations or Rust/LLVM passes yield the same code, if Aster cannot prove additional valid cases, or if compilation/runtime costs outweigh measured benefits.
+**Current gate:** no candidate passes. The strongest lead—proof-producing C-to-safe-Aster translation—is not yet distinct from Scylla + interface/ownership inference + established verification/translation-validation methods, and the current Aster target lacks memory-bearing constructs. Do not make a novelty claim or start a prototype until this gap and target model are resolved.

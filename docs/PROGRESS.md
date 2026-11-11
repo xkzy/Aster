@@ -1,6 +1,6 @@
 # Aster progress
 
-## Status at 2026-06-04
+## Status at 2026-11-12
 
 - [x] Bootstrapped Rust workspace with lexer/parser, scalar type checker, checked native C-emitting backend, and fail-closed scalar safety gate.
 - [x] Experimental strict migration front ends: Rust (tiny standalone subset), C/C++ (constant-return `main`), Python (`sys.exit` with signed i32 literal). Generated Aster is statically checked, built, and compared with the source execution for these accepted forms.
@@ -11,6 +11,15 @@
 - [ ] Formalize core semantics and mechanically validate the compiler/backend safety argument.
 - [ ] Implement borrow/ownership safety and evaluate CAOI independently of safety decisions.
 - [ ] Continue primary-source research; CAOI novelty remains unclaimed.
+
+## Research checkpoint at 2026-11-12
+
+- [x] Created a primary-source claim ledger and expanded prior-art matrix for C/C++→Rust migration, ownership/borrow inference, safe-C systems, cost-aware ownership/reuse, and formal verification/translation validation.
+- [x] Corrected C2Rust citation metadata; added C2SaferRust’s IEEE TSE 2026 publication and other recent prior art.
+- [x] Explicitly recorded that Aster has no `unsafe` construct and that its present scalar-only subset cannot express heap ownership.
+- [x] Ranked six candidate algorithms and recorded a no-go: no candidate yet has a distinct algorithmic delta and feasible nontrivial experiment in the current Aster target.
+- [ ] Finish remaining primary-source/citation-chain review (full technical papers for Cython/Numba/PyPy, full Clouseau/OwnKit/C2Rust texts where available, and additional formal/optimizer literature); official mypyc/Nuitka docs and Python compiler metadata are checked.
+- [ ] Reopen a prototype only if a precise novelty/feasibility gate is passed; no Aster CAOI experiment or performance result exists.
 
 ## Current checkpoint
 
