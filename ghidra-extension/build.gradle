@@ -1,0 +1,7 @@
+if (!System.getenv('GHIDRA_INSTALL_DIR')) {
+    throw new GradleException('Set GHIDRA_INSTALL_DIR to the Ghidra installation used to build this extension')
+}
+apply from: "${System.getenv('GHIDRA_INSTALL_DIR')}/support/buildExtension.gradle"
+
+// Keep scripts runnable from Ghidra's script manager and compile-check them in the extension build.
+sourceSets.main.java.srcDir 'ghidra_scripts'
